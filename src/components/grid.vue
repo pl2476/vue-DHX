@@ -1,0 +1,101 @@
+<template>
+  <div ref="grid" onload="doOnLoad()">
+    <h1>Hide/Show column</h1>
+    <p>Any column can be hidden/shown by API calling:</p>
+    <table width="600">
+      <tr>
+        <td width="50%" valign="top">
+          <div id="gridbox" style="width:100%;height:350px;background-color:white;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            <a href="#" onClick="myGrid.setColumnHidden(this.nextSibling.value,true)">Hide column with index</a>
+            <select>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br>
+            <a href="#" onClick="myGrid.setColumnHidden(this.nextSibling.value,false)">Show column with index</a>
+            <select>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </p>
+          <p>Check whether selected column is hidden:
+            <br>
+            <a href="#" onClick="alert(myGrid.isColumnHidden(this.nextSibling.value))">Is column hidden </a>
+            <select>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+
+<script src="../assets/codebase/dhtmlx.js"></script>
+<script>
+var myGrid
+function doOnLoad() {
+
+  myGrid = new dhtmlXGridObject('gridbox')
+  myGrid.setImagePath("../assets/codebase/imgs")
+  myGrid.setHeader("Sales,Book Title,Author,Price,In Store,Shipping,Bestseller,Date of Publication")
+  myGrid.setInitWidths("80,150,120,80,80,80,80,100")
+  myGrid.setColAlign("right,left,left,right,center,left,center,center")
+  myGrid.setColTypes("dyn,ed,ed,price,ch,co,ra,ro")
+  var combobox = myGrid.getCombo(5)
+  combobox.put("1", "1 Hour")
+  combobox.put("12", "12 Hours")
+  combobox.put("24", "24 Hours")
+  combobox.put("48", "2 days")
+  combobox.put("168", "1 week")
+  combobox.put("pick", "pick up")
+  combobox.put("na", "na")
+  myGrid.setColSorting("int,str,str,int,str,str,str,date")
+  myGrid.enableAutoWidth(true)
+  myGrid.enableAutoHeight(true)
+  myGrid.init()
+  myGrid.load("../assets/common/grid_16_rows_columns_manipulations.xml")
+}
+</script>
+<script>
+
+export default {
+  name: 'grid',
+  props: {
+  },
+  created() {
+
+  },
+  methods: {
+
+  },
+  mounted() {
+
+  }
+}
+</script>
+
+<style>
+@import "../assets/codebase/fonts/font_roboto/roboto.css";
+@import "../assets/codebase/dhtmlx.css";
+</style>
